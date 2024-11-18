@@ -1,15 +1,14 @@
+import java.util.stream.IntStream;
 class Solution {
     public int solution(String t, String p) {
-        // if (t.equals("")) {
-        //     return 0;
-        // }
         int count = 0;
-        for (int i = 0;i<=t.length()-p.length();i++) {
-            int substringInt = Integer.parseInt(t.substring(i, i+p.length()));
-            if (substringInt<=Integer.parseInt(p)) {
-                count++;
-            }
-        }
+        Long refLong = Long.parseLong(p);
+        
+        count = (int)IntStream
+            .range(0, t.length()-p.length()+1)
+            .mapToLong(i -> Long.parseLong(t.substring(i,i+p.length())))
+            .filter(n -> n<=refLong)
+            .count();
         return count;
     }
 }
